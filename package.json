@@ -1,7 +1,7 @@
 {
-  "name": "movies-explorer-api",
+  "name": "api-for-blog",
   "version": "1.0.0",
-  "description": "Проект поиск фильмов",
+  "description": "Приложение для публикации записей",
   "main": "app.js",
   "scripts": {
     "lint": "npx eslint .",
@@ -14,7 +14,7 @@
     "eslint": "^8.28.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.26.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.22"
   },
   "dependencies": {
     "bcrypt": "^5.1.0",
@@ -34,10 +34,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Korvin22/movies-explorer-api.git"
+    "url": "git+https://github.com/Korvin22/API-for-blog.git"
   },
   "bugs": {
-    "url": "https://github.com/Korvin22/movies-explorer-api/issues"
+    "url": "https://github.com/Korvin22/API-for-blog.git/issues"
   },
-  "homepage": "https://github.com/Korvin22/movies-explorer-api#readme"
+  "homepage": "https://github.com/Korvin22/API-for-blog.git#readme",
+  "keywords": []
 }
