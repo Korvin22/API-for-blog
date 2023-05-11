@@ -2,7 +2,7 @@
 const router = require('express').Router();
 const { celebrate, Joi } = require('celebrate');
 const routerUsers = require('./users');
-const routerMovies = require('./movies');
+const routerPosts = require('./posts');
 
 const {
   createUser, login,
@@ -10,7 +10,7 @@ const {
 const { checkAuth } = require('../middlewares/auth');
 
 router.use('/users', checkAuth, routerUsers);
-router.use('/movies', checkAuth, routerMovies);
+router.use('/movies', checkAuth, routerPosts);
 router.post('/signin', celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),

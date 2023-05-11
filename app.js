@@ -1,15 +1,13 @@
 /* eslint-disable no-unused-vars */
 require('dotenv').config();
 const helmet = require('helmet');
-const cors = require('cors');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
 const rateLimit = require('express-rate-limit');
 const routerUsers = require('./routes/users');
-const routerMovies = require('./routes/movies');
+const routerPosts = require('./routes/posts');
 const indexRoutes = require('./routes/index');
 const errorHandler = require('./middlewares/handler');
 
@@ -33,20 +31,7 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const PORT = 3000;
 const app = express();
-const allowedCors = ['http://localhost:3000',
-  'https://diplomagud.nomoredomains.rocks',
-  'http://diplomagud.nomoredomains.rocks',
-  'http://diplomagud.nomoredomains.work',
-  'https://diplomagud.nomoredomains.work',
-];
-const corsOptions = {
-  origin: allowedCors,
-  optionsSuccessStatus: 200,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Origin', 'Accept', 'Authorization'],
-  credentials: true,
-};
-app.use(cors(corsOptions));
+
 app.use(helmet());
 app.use(limiter);
 /* app.use(express.static(path.join(__dirnamey, 'public'))); */
@@ -62,7 +47,7 @@ app.use((err, req, res, next) => {
 });
 
 routerUsers.use((req, res) => { throw new NotFoundError('Роут не найден'); });
-routerMovies.use((req, res) => { throw new NotFoundError('Роут не найден'); });
+routerPosts.use((req, res) => { throw new NotFoundError('Роут не найден'); });
 mongoose.connect(NODE_ENV === 'production' ? BASE_URL : 'dev-secret', {
   useNewUrlParser: true,
 }, (err) => {
