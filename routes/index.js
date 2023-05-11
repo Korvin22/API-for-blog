@@ -10,7 +10,7 @@ const {
 const { checkAuth } = require('../middlewares/auth');
 
 router.use('/users', checkAuth, routerUsers);
-router.use('/movies', checkAuth, routerPosts);
+router.use('/posts', checkAuth, routerPosts);
 router.post('/signin', celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),

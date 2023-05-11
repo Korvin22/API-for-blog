@@ -36,6 +36,7 @@ app.use(helmet());
 app.use(limiter);
 /* app.use(express.static(path.join(__dirnamey, 'public'))); */
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(requestLogger);
 app.use('/', indexRoutes);
 app.use(errorLogger);

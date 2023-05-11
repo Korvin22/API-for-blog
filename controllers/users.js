@@ -90,7 +90,6 @@ const createUser = (req, res, next) => {
             }
           });
       } else {
-        console.log('111');
         next(new WrongData('Пользователь уже существует'));
       }
     })
@@ -147,10 +146,7 @@ const login = async (req, res, next) => {
       return res.status(200).json({ token });
     }
   } catch (e) {
-    console.log(body, 2);
-    console.log(322222222, e.name);
     if (e.name === 'ValidationError' || e.name === 'CastError') {
-      console.log(body, 3);
       next(new ValidationError('Данные введены не корректно'));
       return;
     }

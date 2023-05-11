@@ -16,6 +16,9 @@ const postSchema = new mongoose.Schema({
     type: mongoose.ObjectId,
     required: true,
   },
+  name: {
+    type: String,
+  },
 });
 
 const postModel = mongoose.model('card', postSchema);

@@ -44,9 +44,10 @@ const deletePost = async (req, res, next) => {
   }
 };
 const createPost = async (req, res, next) => {
+  console.log(req.user);
   try {
     const post = await Post.create({
-      message: req.body.country,
+      message: req.body.message,
       owner: req.user._id,
     });
     if (!post) {
@@ -54,6 +55,7 @@ const createPost = async (req, res, next) => {
     }
     return res.status(200).send(post);
   } catch (e) {
+    console.log(e);
     if (e.name === 'ValidationError') {
       next(new ValidationError('Данные введены неправильно'));
     }
