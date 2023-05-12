@@ -12,7 +12,6 @@ const routerPosts = require('./routes/posts');
 const indexRoutes = require('./routes/index');
 const errorHandler = require('./middlewares/handler');
 
-const { NODE_ENV, BASE_URL } = process.env;
 const { NotFoundError } = require('./constants/errors');
 
 const limiter = rateLimit({
@@ -52,8 +51,9 @@ routerUsers.use((req, res) => {
 routerPosts.use((req, res) => {
   throw new NotFoundError('Роут не найден');
 });
+const NODE_ENV = 'production';
 mongoose.connect(
-  NODE_ENV === 'production' ? BASE_URL : 'dev-secret',
+  NODE_ENV === 'production' ? 'mongodb://localhost:27017/postsdb' : 'dev-secret',
   {
     useNewUrlParser: true,
   },
