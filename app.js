@@ -13,9 +13,7 @@ const indexRoutes = require('./routes/index');
 const errorHandler = require('./middlewares/handler');
 
 const { NODE_ENV, BASE_URL } = process.env;
-const {
-  NotFoundError,
-} = require('./constants/errors');
+const { NotFoundError } = require('./constants/errors');
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
@@ -24,9 +22,7 @@ const limiter = rateLimit({
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
 
-const {
-  createUser, login,
-} = require('./controllers/users');
+const { createUser, login } = require('./controllers/users');
 const { checkAuth } = require('./middlewares/auth');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
@@ -50,14 +46,23 @@ app.use((err, req, res, next) => {
   errorHandler(err, req, res, next);
 });
 
-routerUsers.use((req, res) => { throw new NotFoundError('Роут не найден'); });
-routerPosts.use((req, res) => { throw new NotFoundError('Роут не найден'); });
-mongoose.connect(NODE_ENV === 'production' ? BASE_URL : 'dev-secret', {
-  useNewUrlParser: true,
-}, (err) => {
-  if (err) console.log(err);
-  else console.log('mongdb is connected');
-  app.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}`);
-  });
+routerUsers.use((req, res) => {
+  throw new NotFoundError('Роут не найден');
 });
+routerPosts.use((req, res) => {
+  throw new NotFoundError('Роут не найден');
+});
+mongoose.connect(
+  NODE_ENV === 'production' ? BASE_URL : 'dev-secret',
+  {
+    useNewUrlParser: true,
+  },
+  (err) => {
+    if (err) console.log(err);
+    else console.log('mongdb is connected');
+    app.listen(PORT, () => {
+      console.log(`App listening on port ${PORT}`);
+    });
+  },
+);
+module.exports = app;
