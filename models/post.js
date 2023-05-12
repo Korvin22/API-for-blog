@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const postSchema = new mongoose.Schema({
   createdAt: {
     type: Date,
-    default: Date.now,
+    default: Date.now(),
   },
   message: {
     type: String,
@@ -12,15 +12,17 @@ const postSchema = new mongoose.Schema({
     minlength: 2,
     maxlength: 30,
   },
+  name: {
+    type: String,
+    minlength: 2,
+    maxlength: 30,
+  },
   owner: {
     type: mongoose.ObjectId,
     required: true,
   },
-  name: {
-    type: String,
-  },
 });
 
-const postModel = mongoose.model('card', postSchema);
+const postModel = mongoose.model('post', postSchema);
 
 module.exports = postModel;

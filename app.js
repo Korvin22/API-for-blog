@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
 const rateLimit = require('express-rate-limit');
+const paginate = require('express-paginate');
 const routerUsers = require('./routes/users');
 const routerPosts = require('./routes/posts');
 const indexRoutes = require('./routes/index');
@@ -32,6 +33,8 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const PORT = 3000;
 const app = express();
 
+// keep this before all routes that will use pagination
+app.use(paginate.middleware(20, 100));
 app.use(helmet());
 app.use(limiter);
 /* app.use(express.static(path.join(__dirnamey, 'public'))); */

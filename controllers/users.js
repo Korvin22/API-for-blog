@@ -132,9 +132,9 @@ const updateUser = async (req, res, next) => {
 const login = async (req, res, next) => {
   const body = { ...req.body };
   const { email, password } = body;
-  console.log(body, 1);
   try {
     const user = await User.findOne({ email }).select('+password');
+    console.log(user, 111);
     if (!user) {
       console.log('нет пользователя');
       throw new AuthorizationError('Неверные логин или пароль');
